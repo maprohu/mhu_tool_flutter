@@ -1,1 +1,1 @@
-export '../lib/mhu_tool_flutter.dart';
+export '../lib/src/mhu_tool_flutter.dart';
