@@ -1,0 +1,30 @@
+name: mhu
+version: 0.0.4+4
+publish_to: none
+
+executables:
+  mhu:
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+
+dependencies:
+  args: any
+  collection: any
+  html: any
+  http: any
+  path: any
+  pubspec_lock: any
+  xml: any
+  yaml: any
+  pub:
+    git: https://github.com/dart-lang/pub
+  googleapis_auth: any
+  pubspec: any
+  mhu_dart_commons:
+    path: ../mhu_dart_commons
+
+dev_dependencies: 
+  test: any
+
