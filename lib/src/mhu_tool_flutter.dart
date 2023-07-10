@@ -7,7 +7,7 @@ import 'commands/activate.dart';
 import 'commands/icon.dart';
 
 const script = 'mhu';
-const description = "A command line tool to help with Flutter development.";
+const description = "A command line tool to help with Dart and Flutter development.";
 
 void main(List<String> args) async {
   final runner = CommandRunner(script, description)
