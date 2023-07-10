@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:args/command_runner.dart';
 import 'package:mhu_dart_commons/io.dart';
 import 'package:pubspec/pubspec.dart';
 
@@ -18,7 +19,6 @@ class DartPackageDir {
 
   late Future<PubSpec> pubspec = PubSpec.load(packageDir);
 
-
   late final Directory assets = packageDir.dir("assets");
   late final File splashPng = assets.file("splash.png");
   late final File iconPng = assets.file("icon.png");
@@ -33,13 +33,13 @@ class DartPackageDir {
   late final Directory webIcons = web.dir('icons');
 
   Future<void> addDependency(
-      String name, {
-        bool dev = false,
-        String? path,
-      }) async {
+    String name, {
+    bool dev = false,
+    String? path,
+  }) async {
     final pubspecLoaded = await pubspec;
     final deps =
-    dev ? pubspecLoaded.devDependencies : pubspecLoaded.dependencies;
+        dev ? pubspecLoaded.devDependencies : pubspecLoaded.dependencies;
     if (deps.containsKey(name)) {
       stdout.writeln('Project already contains dependency, not adding: $name');
       return;
@@ -91,6 +91,7 @@ Future<T> requirePackageDir<T>(
     dir = parent;
   }
 }
+
 extension PubSpecX on PubSpec {
   String? title() => unParsedYaml?['mhu']?['title'];
 
@@ -101,4 +102,43 @@ extension PubSpecX on PubSpec {
   String? foreground() => unParsedYaml?['mhu']?['color'];
 
   String? background() => unParsedYaml?['flutter_native_splash']?['color'];
+}
+
+class RunCommand extends Command<void> {
+  final String name;
+
+  final String executable;
+
+  final List<String> arguments;
+
+  late final String description = [
+    'runs:',
+    executable,
+    ...arguments,
+  ].join(' ');
+
+  @override
+  FutureOr<void>? run() async {
+    await requirePackageDir((package) async {
+      await package.packageDir.run(
+        executable,
+        arguments,
+      );
+    });
+  }
+
+  RunCommand({
+    required this.name,
+    required this.executable,
+    required this.arguments,
+  });
+}
+
+class DartCommand extends RunCommand {
+  DartCommand({
+    required super.name,
+    required super.arguments,
+  }) : super(
+          executable: 'dart',
+        );
 }
