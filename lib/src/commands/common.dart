@@ -104,12 +104,26 @@ extension PubSpecX on PubSpec {
   String? background() => unParsedYaml?['flutter_native_splash']?['color'];
 }
 
+extension MhuCommandX<T> on Command<T> {
+  bool hasOption(String option) {
+    final argResults = this.argResults;
+    if (argResults == null) {
+      return false;
+    }
+    return argResults[option];
+  }
+}
+
 class RunCommand extends Command<void> {
+  static const only = 'only';
+
   final String name;
 
   final String executable;
 
   final List<String> arguments;
+
+  final Command? before;
 
   late final String description = [
     'runs:',
@@ -119,6 +133,10 @@ class RunCommand extends Command<void> {
 
   @override
   FutureOr<void>? run() async {
+    final before = this.before;
+    if (before != null && !hasOption(only)) {
+      await before.run();
+    }
     await requirePackageDir((package) async {
       await package.packageDir.run(
         executable,
@@ -131,14 +149,37 @@ class RunCommand extends Command<void> {
     required this.name,
     required this.executable,
     required this.arguments,
-  });
+    Command? before,
+  }) : before = before {
+    if (before != null) {
+      argParser.addFlag(
+        only,
+        abbr: 'o',
+        help: 'do not run "${before.name}" before',
+      );
+    }
+  }
 }
 
 class DartCommand extends RunCommand {
   DartCommand({
     required super.name,
     required super.arguments,
+    super.before,
   }) : super(
           executable: 'dart',
         );
+}
+
+Future<void> writeIfDirty({
+  required File file,
+  required bool dirty,
+  required String Function() content,
+}) async {
+  if (dirty) {
+    stdout.writeln('Updating: ${file.path}');
+    await file.writeAsString(content());
+  } else {
+    stdout.writeln('Not updating: ${file.path} is already up to date.');
+  }
 }

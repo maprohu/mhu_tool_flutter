@@ -161,6 +161,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
+  csslib:
+    dependency: transitive
+    description:
+      name: csslib
+      sha256: "706b5707578e0c1b4b7550f64078f0a0f19dec3f50a178ffae7006b0a9ca58fb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   dart_internal:
     dependency: transitive
     description:
@@ -217,6 +225,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+  html:
+    dependency: "direct main"
+    description:
+      name: html
+      sha256: "3a7812d5bcd2894edf53dfaf8cd640876cf6cef50a8f238745c8b8120ea74d3a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.15.4"
   http:
     dependency: "direct main"
     description:
@@ -292,10 +308,9 @@ packages:
   mhu_dart_commons:
     dependency: "direct main"
     description:
-      name: mhu_dart_commons
-      sha256: b1294752ee4bab2387f3d5a4e279cce8973a59a2975a796dd8d7adb7850e9126
-      url: "https://pub.dev"
-    source: hosted
+      path: "../mhu_dart_commons"
+      relative: true
+    source: path
     version: "1.0.2"
   mime:
     dependency: transitive

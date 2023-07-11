@@ -1,5 +1,20 @@
 import 'package:mhu/src/commands/common.dart';
 
+class PubGetCommand extends DartCommand {
+  PubGetCommand()
+      : super(
+          name: 'pubget',
+          arguments: [
+            'pub',
+            'get',
+          ],
+        );
+
+ final aliases = [
+   'pg',
+ ] ;
+}
+
 class BuildCommand extends DartCommand {
   BuildCommand()
       : super(
@@ -9,7 +24,9 @@ class BuildCommand extends DartCommand {
             'build_runner',
             'build',
             '--verbose',
+            '--delete-conflicting-outputs',
           ],
+          before: PubGetCommand(),
         );
 }
 
@@ -21,6 +38,9 @@ class WatchCommand extends DartCommand {
             'run',
             'build_runner',
             'watch',
+            '--verbose',
+            '--delete-conflicting-outputs',
           ],
+          before: PubGetCommand(),
         );
 }

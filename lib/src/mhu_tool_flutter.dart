@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 import 'package:mhu/src/commands/build.dart';
+import 'package:mhu/src/commands/title.dart';
+import 'package:mhu/src/commands/update.dart';
 import 'package:mhu/src/version.g.dart';
 import 'package:mhu_dart_commons/commons.dart';
 
@@ -15,8 +17,11 @@ const description =
 
 void main(List<String> args) async {
   final runner = CommandRunner(script, description)
-    ..addCommand(ActivateCommand())
     ..addCommand(IconCommand())
+    ..addCommand(TitleCommand())
+    ..addCommand(UpdateCommand())
+    ..addCommand(ActivateCommand())
+    ..addCommand(PubGetCommand())
     ..addCommand(BuildCommand())
     ..addCommand(WatchCommand());
 

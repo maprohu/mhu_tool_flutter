@@ -16,7 +16,10 @@ dependencies:
   xml: ^6.3.0
   yaml: ^3.1.2
   pubspec: ^2.3.0
-  mhu_dart_commons: ^1.0.2
+  html: ^0.15.4
+#  mhu_dart_commons: ^1.0.2
+  mhu_dart_commons:
+    path: ../mhu_dart_commons
 
 dev_dependencies: 
   test: ^1.24.4
