@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:mhu/src/commands/common.dart';
 import 'package:mhu_dart_commons/io.dart';
@@ -33,7 +32,7 @@ Future<bool> buildRunnerBefore() async {
       ],
     ).run();
     return await pubGetBefore();
-  } on MhuExitStatusException catch (e) {
+  } on MhuExitStatusException {
     return false;
   }
 }
