@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
+import 'package:mhu_dart_commons/commons.dart';
 import 'package:mhu_dart_commons/io.dart';
 import 'package:pubspec/pubspec.dart';
 
@@ -32,14 +33,13 @@ class DartPackageDir {
   late final File faviconPng = web.file('favicon.png');
   late final Directory webIcons = web.dir('icons');
 
-  Future<void> addDependency(
-    String name, {
+  Future<void> addDependency(String name, {
     bool dev = false,
     String? path,
   }) async {
     final pubspecLoaded = await pubspec;
     final deps =
-        dev ? pubspecLoaded.devDependencies : pubspecLoaded.dependencies;
+    dev ? pubspecLoaded.devDependencies : pubspecLoaded.dependencies;
     if (deps.containsKey(name)) {
       stdout.writeln('Project already contains dependency, not adding: $name');
       return;
@@ -64,13 +64,12 @@ class DartPackageDir {
 class PubspecYamlNotFound extends MhuToolException {
   PubspecYamlNotFound(Directory dir)
       : super(
-          'Could not find "$pubspecYamlFileName" in parent hierarchy of $dir',
-        );
+    'Could not find "$pubspecYamlFileName" in parent hierarchy of $dir',
+  );
 }
 
 Future<T> requirePackageDir<T>(
-  FutureOr<T> Function(DartPackageDir package) action,
-) async {
+    FutureOr<T> Function(DartPackageDir package) action,) async {
   var dir = Directory.current;
 
   while (true) {
@@ -112,7 +111,14 @@ extension MhuCommandX<T> on Command<T> {
     }
     return argResults[option];
   }
+
+  BeforeCommand get toBefore => () async {
+    await this.run();
+    return true;
+  };
 }
+
+typedef BeforeCommand = FutureOr<bool> Function();
 
 class RunCommand extends Command<void> {
   static const only = 'only';
@@ -123,7 +129,7 @@ class RunCommand extends Command<void> {
 
   final List<String> arguments;
 
-  final Command? before;
+  final BeforeCommand? before;
 
   late final String description = [
     'runs:',
@@ -135,7 +141,12 @@ class RunCommand extends Command<void> {
   FutureOr<void>? run() async {
     final before = this.before;
     if (before != null && !hasOption(only)) {
-      await before.run();
+      final goOn = await before();
+
+      if (!goOn) {
+        stdout.writeln('not running $name');
+        return;
+      }
     }
     await requirePackageDir((package) async {
       await package.packageDir.run(
@@ -149,13 +160,13 @@ class RunCommand extends Command<void> {
     required this.name,
     required this.executable,
     required this.arguments,
-    Command? before,
+    BeforeCommand? before,
   }) : before = before {
     if (before != null) {
       argParser.addFlag(
         only,
         abbr: 'o',
-        help: 'do not run "${before.name}" before',
+        help: 'do not run check before',
       );
     }
   }
@@ -167,8 +178,8 @@ class DartCommand extends RunCommand {
     required super.arguments,
     super.before,
   }) : super(
-          executable: 'dart',
-        );
+    executable: 'dart',
+  );
 }
 
 Future<void> writeIfDirty({
@@ -183,3 +194,4 @@ Future<void> writeIfDirty({
     stdout.writeln('Not updating: ${file.path} is already up to date.');
   }
 }
+

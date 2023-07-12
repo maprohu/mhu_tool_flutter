@@ -1,5 +1,7 @@
 Command line utility to help with Dart and Flutter development.
 
+https://pub.dev/packages/mhu
+
 # Installation
 
 ```bash

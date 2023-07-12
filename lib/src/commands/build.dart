@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:mhu/src/commands/common.dart';
+import 'package:mhu_dart_commons/io.dart';
 
 class PubGetCommand extends DartCommand {
   PubGetCommand()
@@ -10,10 +13,31 @@ class PubGetCommand extends DartCommand {
           ],
         );
 
- final aliases = [
-   'pg',
- ] ;
+  final aliases = [
+    'pg',
+  ];
 }
+
+Future<bool> pubGetBefore() async {
+  await PubGetCommand().run();
+  return true;
+}
+
+Future<bool> buildRunnerBefore() async {
+  try {
+    await DartCommand(
+      name: 'check_build_runner',
+      arguments: [
+        'run',
+        'build_runner',
+      ],
+    ).run();
+    return await pubGetBefore();
+  } on MhuExitStatusException catch (e) {
+    return false;
+  }
+}
+
 
 class BuildCommand extends DartCommand {
   BuildCommand()
@@ -26,7 +50,7 @@ class BuildCommand extends DartCommand {
             '--verbose',
             '--delete-conflicting-outputs',
           ],
-          before: PubGetCommand(),
+          before: buildRunnerBefore,
         );
 }
 
@@ -41,6 +65,6 @@ class WatchCommand extends DartCommand {
             '--verbose',
             '--delete-conflicting-outputs',
           ],
-          before: PubGetCommand(),
+          before: buildRunnerBefore,
         );
 }

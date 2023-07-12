@@ -1,3 +1,5 @@
+import 'package:mhu/src/commands/build.dart';
+
 import 'common.dart';
 
 class DryPubCommand extends DartCommand {
@@ -9,5 +11,6 @@ class DryPubCommand extends DartCommand {
       'publish',
       '--dry-run',
     ],
+    before: BuildCommand().toBefore,
   );
 }
