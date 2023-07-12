@@ -1,8 +1,4 @@
-import 'dart:async';
-import 'dart:io';
 
-import 'package:args/command_runner.dart';
-import 'package:mhu_dart_commons/io.dart';
 import 'common.dart';
 
 class ActivateCommand extends DartCommand {

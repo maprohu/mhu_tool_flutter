@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 import 'package:mhu/src/commands/build.dart';
+import 'package:mhu/src/commands/publish.dart';
 import 'package:mhu/src/commands/title.dart';
 import 'package:mhu/src/commands/update.dart';
 import 'package:mhu/src/version.g.dart';
@@ -22,6 +23,7 @@ void main(List<String> args) async {
     ..addCommand(UpdateCommand())
     ..addCommand(ActivateCommand())
     ..addCommand(PubGetCommand())
+    ..addCommand(DryPubCommand())
     ..addCommand(BuildCommand())
     ..addCommand(WatchCommand());
 
