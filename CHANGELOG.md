@@ -1,3 +1,7 @@
+## 1.0.6
+
+- fixed build_runner check bug
+
 ## 1.0.5
 
 - run build_runner before drypub

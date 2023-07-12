@@ -29,6 +29,7 @@ Future<bool> buildRunnerBefore() async {
       arguments: [
         'run',
         'build_runner',
+        '--help',
       ],
     ).run();
     return await pubGetBefore();
