@@ -1,3 +1,7 @@
+## 1.0.4
+
+- retrying automated publishing
+
 ## 1.0.3
 
 - setting up automated publishing
