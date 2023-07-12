@@ -1,5 +1,5 @@
 name: mhu
-version: 1.0.3-dev
+version: 1.0.3
 description: Command line utility to help with Dart and Flutter development
 repository: https://github.com/maprohu/mhu_tool_flutter
 
