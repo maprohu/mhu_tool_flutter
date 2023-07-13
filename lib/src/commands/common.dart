@@ -26,6 +26,7 @@ class DartPackageDir {
   late final File titlePng = assets.file("title.png");
   late final File shortTitlePng = assets.file("short_title.png");
   late final File playStorePng = assets.file("play_store.png");
+  late final File playStoreFeaturePng = assets.file("play_store_feature.png");
 
   late final Directory web = packageDir.dir('web');
   late final File indexHtml = web.file('index.html');

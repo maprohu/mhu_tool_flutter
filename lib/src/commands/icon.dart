@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:args/command_runner.dart';
 import 'package:mhu_dart_commons/io.dart';
@@ -264,6 +265,13 @@ Future<void> processIcon(
     background: background,
     size: 512,
   );
+  await svgToPngCenter(
+    svg: svgFileWithColor,
+    png: app.playStoreFeaturePng,
+    background: background,
+    width: 1024,
+    height: 500,
+  );
 }
 
 Future svgToPng({
@@ -293,6 +301,48 @@ Future svgToPng({
       iconOffset.toString(),
       '--top',
       iconOffset.toString(),
+      if (background != null) ...[
+        '--background-color',
+        background,
+      ],
+      '--output',
+      png.path,
+      svg.path,
+    ],
+    errorMessage: errorMessage,
+  );
+}
+Future svgToPngCenter({
+  required File svg,
+  required File png,
+  String? background,
+  required int width,
+  required int height,
+  double factor = 1.0,
+  String? errorMessage,
+}) async {
+  stdout.writeln('Converting SVG to PNG: ${png.path}');
+
+  final int size = min(width, height);
+
+  final int iconSize = (size * factor).toInt();
+  final int iconWidthOffset = (width - iconSize) ~/ 2;
+  final int iconHeightOffset = (height - iconSize) ~/ 2;
+
+  await Directory.current.run(
+    'rsvg-convert',
+    [
+      // '--keep-aspect-ratio',
+      '--page-width',
+      width.toString(),
+      '--page-height',
+      height.toString(),
+      '--width',
+      iconSize.toString(),
+      '--left',
+      iconWidthOffset.toString(),
+      '--top',
+      iconHeightOffset.toString(),
       if (background != null) ...[
         '--background-color',
         background,

@@ -1,3 +1,7 @@
+## 1.0.7
+
+- added feature for taking automated app screenshots
+
 ## 1.0.6
 
 - fixed build_runner check bug

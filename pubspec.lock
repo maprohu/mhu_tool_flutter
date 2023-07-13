@@ -130,7 +130,7 @@ packages:
     source: hosted
     version: "4.5.0"
   collection:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: collection
       sha256: f092b211a4319e98e5ff58223576de6c2803db36221657b46c82574721240687
@@ -309,10 +309,10 @@ packages:
     dependency: "direct main"
     description:
       name: mhu_dart_commons
-      sha256: a50e67705c96309af14ef2d2dd2e02a0a5a9bc6710ca427ca35abe058f9bde0f
+      sha256: "96670eafdcf18e16ad73fa6b2be6b23389108be2010b15f7370fbab1c123f626"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.5"
+    version: "1.0.6"
   mime:
     dependency: transitive
     description:
