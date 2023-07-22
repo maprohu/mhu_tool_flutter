@@ -32,6 +32,7 @@ class PblibCommand extends Command<void> {
       await runPbLibGenerator(
         cwd: package.packageDir,
         dependencies: ps.protoDeps().toList(),
+        protoc: false,
       );
     });
   }
