@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 import 'package:mhu/src/commands/build.dart';
+import 'package:mhu/src/commands/dependencies.dart';
+import 'package:mhu/src/commands/proto.dart';
 import 'package:mhu/src/commands/publish.dart';
 import 'package:mhu/src/commands/title.dart';
 import 'package:mhu/src/commands/update.dart';
@@ -19,11 +21,16 @@ const description =
 
 void main(List<String> args) async {
   final runner = CommandRunner(script, description)
+    ..addCommand(ProtocCommand())
+    ..addCommand(PblibCommand())
+    ..addCommand(PbfieldCommand())
+    ..addCommand(PbCommand())
     ..addCommand(IconCommand())
     ..addCommand(TitleCommand())
     ..addCommand(ScreenshotsCommand())
     ..addCommand(UpdateCommand())
     ..addCommand(ActivateCommand())
+    ..addCommand(AddCommand())
     ..addCommand(PubGetCommand())
     ..addCommand(DryPubCommand())
     ..addCommand(BuildCommand())
