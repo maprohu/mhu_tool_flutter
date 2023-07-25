@@ -219,9 +219,9 @@ Future updateAndroidManifestXml(
   final labelAttr =
       appElement.attributes.firstWhere((e) => e.name.local == 'label');
 
-  if (labelAttr.value != title.title) {
+  if (labelAttr.value != title.shortTitle) {
     dirty = true;
-    labelAttr.value = title.title;
+    labelAttr.value = title.shortTitle;
   }
 
   await writeIfDirty(
@@ -260,9 +260,9 @@ Future updateInfoPlist(
     );
   }
 
-  if (nameValue.innerText != title.title) {
+  if (nameValue.innerText != title.shortTitle) {
     dirty = true;
-    nameValue.innerText = title.title;
+    nameValue.innerText = title.shortTitle;
   }
 
   await writeIfDirty(

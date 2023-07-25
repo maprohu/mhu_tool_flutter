@@ -382,14 +382,14 @@ packages:
       path: "../mhu_dart_commons"
       relative: true
     source: path
-    version: "1.0.8-dev"
+    version: "1.0.8"
   mhu_dart_proto:
     dependency: "direct overridden"
     description:
       path: "../mhu_dart_proto"
       relative: true
     source: path
-    version: "1.0.1"
+    version: "1.0.2"
   mime:
     dependency: transitive
     description:
