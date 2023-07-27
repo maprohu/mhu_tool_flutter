@@ -22,6 +22,7 @@ class DartPackageDir {
 
   late final Directory assets = packageDir.dir("assets");
   late final File splashPng = assets.file("splash.png");
+  late final File iconSvg = assets.file("icon.svg");
   late final File iconPng = assets.file("icon.png");
   late final File iconAdaptivePng = assets.file("icon_adaptive.png");
   late final File titlePng = assets.file("title.png");

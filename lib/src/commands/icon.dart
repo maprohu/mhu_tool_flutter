@@ -134,6 +134,10 @@ Future<void> processIcon(
   final assets = app.assets;
   await assets.create(recursive: true);
 
+  await app.iconSvg.writeAsString(
+    await svgFileWithColor.readAsString(),
+  );
+
   final splashFile = app.splashPng;
 
   await svgToPng(
@@ -312,6 +316,7 @@ Future svgToPng({
     errorMessage: errorMessage,
   );
 }
+
 Future svgToPngCenter({
   required File svg,
   required File png,
