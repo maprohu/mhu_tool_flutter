@@ -10,10 +10,12 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependency_overrides:
-  mhu_dart_builder:
-    path: ../mhu_dart_builder
+  mhu_dart_pbgen:
+    path: ../mhu_dart_pbgen
   mhu_dart_commons:
     path: ../mhu_dart_commons
+  mhu_dart_sourcegen:
+    path: ../mhu_dart_sourcegen
   mhu_dart_proto:
     path: ../mhu_dart_proto
 
@@ -26,8 +28,9 @@ dependencies:
   pubspec: ^2.3.0
   html: ^0.15.4
   collection: ^1.17.1
-  mhu_dart_builder: ^1.0.0
+  mhu_dart_pbgen: ^1.0.0
   mhu_dart_commons: ^1.0.6
+  mhu_dart_sourcegen: ^1.0.1
   recase: ^4.1.0
 
 dev_dependencies: 

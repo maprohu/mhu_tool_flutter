@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 import 'package:mhu/src/commands/common.dart';
-import 'package:mhu_dart_builder/mhu_dart_builder.dart';
 import 'package:mhu_dart_commons/io.dart';
+import 'package:mhu_dart_pbgen/mhu_dart_pbgen.dart';
+import 'package:mhu_dart_sourcegen/mhu_dart_sourcegen.dart';
 
 // class ProtocCommand extends Command<void> {
 //   final name = "protoc";
@@ -43,29 +44,33 @@ class ProtocCommand extends DartCommand {
 
   ProtocCommand()
       : super(
-    name: 'protoc',
-    arguments: [
-      _path,
-    ],
-    before: () async {
-      return await requirePackageDir((package) async {
-        final ps = await package.pubspec;
-        final file = package.packageDir.file(_path);
-        await file.parent.create(recursive: true);
+          name: 'protoc',
+          arguments: [
+            _path,
+          ],
+          before: () async {
+            return await requirePackageDir((package) async {
+              final ps = await package.pubspec;
+              final file = package.packageDir.file(_path);
+              await file.parent.create(recursive: true);
 
-        final deps = ps.protoDeps().map((e) => e.dartRawSingleQuoteStringLiteral).join(',');
+              final deps = ps
+                  .protoDeps()
+                  .map((e) => e.dartRawSingleQuoteStringLiteral)
+                  .join(',');
 
-        await file.writeAsString([
-          "import 'package:mhu_dart_builder/mhu_dart_builder.dart';",
-          'void main() async {',
-          '  await runProtoc(dependencies: [$deps]);'
-          '}',
-        ].join('\n'));
-        return true;
-      });
-    },
-  );
+              await file.writeAsString([
+                "import 'package:mhu_dart_builder/mhu_dart_builder.dart';",
+                'void main() async {',
+                '  await runProtoc(dependencies: [$deps]);',
+                '}',
+              ].join('\n'));
+              return true;
+            });
+          },
+        );
 }
+
 class PbfieldCommand extends DartCommand {
   static final _path = '.dart_tool/mhu/pbfield.dart';
 
@@ -81,7 +86,8 @@ class PbfieldCommand extends DartCommand {
               final file = package.packageDir.file(_path);
               await file.parent.create(recursive: true);
 
-              final pblibPath = Directory("../..").pblibFile(packageName).filePath.join('/');
+              final pblibPath =
+                  Directory("../..").pblibFile(packageName).filePath.join('/');
 
               await file.writeAsString([
                 'import "$pblibPath";',

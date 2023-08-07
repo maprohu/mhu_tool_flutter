@@ -369,27 +369,34 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
-  mhu_dart_builder:
-    dependency: "direct main"
-    description:
-      path: "../mhu_dart_builder"
-      relative: true
-    source: path
-    version: "1.0.3"
   mhu_dart_commons:
     dependency: "direct main"
     description:
       path: "../mhu_dart_commons"
       relative: true
     source: path
-    version: "1.0.8"
+    version: "1.0.9"
+  mhu_dart_pbgen:
+    dependency: "direct main"
+    description:
+      path: "../mhu_dart_pbgen"
+      relative: true
+    source: path
+    version: "1.0.1"
   mhu_dart_proto:
     dependency: "direct overridden"
     description:
       path: "../mhu_dart_proto"
       relative: true
     source: path
-    version: "1.0.2"
+    version: "1.0.3"
+  mhu_dart_sourcegen:
+    dependency: "direct main"
+    description:
+      path: "../mhu_dart_sourcegen"
+      relative: true
+    source: path
+    version: "1.0.1"
   mime:
     dependency: transitive
     description:
@@ -446,14 +453,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
-  protoc_plugin:
-    dependency: transitive
-    description:
-      name: protoc_plugin
-      sha256: "41f06692f6d46018a6547f088d5598282f6d00cf6c33c535647c075b9ee62dd7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "21.0.2"
   pub_semver:
     dependency: transitive
     description:
@@ -550,14 +549,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
-  source_gen:
-    dependency: transitive
-    description:
-      name: source_gen
-      sha256: fc0da689e5302edb6177fdd964efcb7f58912f43c28c2047a808f5bfff643d16
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.4.0"
   source_map_stack_trace:
     dependency: transitive
     description:
