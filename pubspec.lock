@@ -369,6 +369,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  mhu_dart_annotation:
+    dependency: transitive
+    description:
+      name: mhu_dart_annotation
+      sha256: "45e9c5a1fb2360154067c36f24174bdad7a54bd9e13994bfd47ddb8b1a8b74cf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   mhu_dart_commons:
     dependency: "direct main"
     description:
