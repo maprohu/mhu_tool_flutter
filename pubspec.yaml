@@ -10,6 +10,8 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependency_overrides:
+  mhu_dart_annotation:
+    path: ../mhu_dart_annotation
   mhu_dart_pbgen:
     path: ../mhu_dart_pbgen
   mhu_dart_commons:
