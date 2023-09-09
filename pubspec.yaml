@@ -18,8 +18,10 @@ dependency_overrides:
     path: ../mhu_dart_commons
   mhu_dart_sourcegen:
     path: ../mhu_dart_sourcegen
-#  mhu_dart_proto:
-#    path: ../mhu_dart_proto
+  mhu_dart_protoc:
+    path: ../mhu_dart_protoc
+  mhu_dart_pbschema:
+    path: ../mhu_dart_pbschema
 
 dependencies:
   args: ^2.4.2

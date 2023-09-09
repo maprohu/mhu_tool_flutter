@@ -22,22 +22,22 @@ import 'package:mhu_dart_sourcegen/mhu_dart_sourcegen.dart';
 //   }
 // }
 
-class PblibCommand extends Command<void> {
-  final name = "pblib";
-  final description = "Generates pblib";
-
-  @override
-  Future<void>? run() async {
-    await requirePackageDir((package) async {
-      final ps = await package.pubspec;
-      await runPbLibGenerator(
-        cwd: package.packageDir,
-        dependencies: ps.protoDeps().toList(),
-        protoc: false,
-      );
-    });
-  }
-}
+// class PblibCommand extends Command<void> {
+//   final name = "pblib";
+//   final description = "Generates pblib";
+//
+//   @override
+//   Future<void>? run() async {
+//     await requirePackageDir((package) async {
+//       final ps = await package.pubspec;
+//       await runPbLibGenerator(
+//         cwd: package.packageDir,
+//         dependencies: ps.protoDeps().toList(),
+//         protoc: false,
+//       );
+//     });
+//   }
+// }
 
 class ProtocCommand extends DartCommand {
   static final _path = '.dart_tool/mhu/protoc.dart';
@@ -71,36 +71,36 @@ class ProtocCommand extends DartCommand {
         );
 }
 
-class PbfieldCommand extends DartCommand {
-  static final _path = '.dart_tool/mhu/pbfield.dart';
-
-  PbfieldCommand()
-      : super(
-          name: 'pbfield',
-          arguments: [
-            _path,
-          ],
-          before: () async {
-            return await requirePackageDir((package) async {
-              final packageName = (await package.pubspec).name!;
-              final file = package.packageDir.file(_path);
-              await file.parent.create(recursive: true);
-
-              final pblibPath =
-                  Directory("../..").pblibFile(packageName).filePath.join('/');
-
-              await file.writeAsString([
-                'import "$pblibPath";',
-                "import 'package:mhu_dart_builder/mhu_dart_builder.dart';",
-                'void main() async {',
-                '  await runPbFieldGenerator(lib: ${pblibVarName(packageName)});',
-                '}',
-              ].join('\n'));
-              return true;
-            });
-          },
-        );
-}
+// class PbfieldCommand extends DartCommand {
+//   static final _path = '.dart_tool/mhu/pbfield.dart';
+//
+//   PbfieldCommand()
+//       : super(
+//           name: 'pbfield',
+//           arguments: [
+//             _path,
+//           ],
+//           before: () async {
+//             return await requirePackageDir((package) async {
+//               final packageName = (await package.pubspec).name!;
+//               final file = package.packageDir.file(_path);
+//               await file.parent.create(recursive: true);
+//
+//               final pblibPath =
+//                   Directory("../..").pblibFile(packageName).filePath.join('/');
+//
+//               await file.writeAsString([
+//                 'import "$pblibPath";',
+//                 "import 'package:mhu_dart_builder/mhu_dart_builder.dart';",
+//                 'void main() async {',
+//                 '  await runPbFieldGenerator(lib: ${pblibVarName(packageName)});',
+//                 '}',
+//               ].join('\n'));
+//               return true;
+//             });
+//           },
+//         );
+// }
 
 class PbCommand extends Command<void> {
   final name = "pb";
@@ -109,7 +109,7 @@ class PbCommand extends Command<void> {
   @override
   Future<void>? run() async {
     await ProtocCommand().run();
-    await PblibCommand().run();
-    await PbfieldCommand().run();
+    // await PblibCommand().run();
+    // await PbfieldCommand().run();
   }
 }

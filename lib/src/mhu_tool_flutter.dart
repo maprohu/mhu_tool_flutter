@@ -22,8 +22,6 @@ const description =
 void main(List<String> args) async {
   final runner = CommandRunner(script, description)
     ..addCommand(ProtocCommand())
-    ..addCommand(PblibCommand())
-    ..addCommand(PbfieldCommand())
     ..addCommand(PbCommand())
     ..addCommand(IconCommand())
     ..addCommand(TitleCommand())
